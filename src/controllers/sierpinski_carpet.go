@@ -11,20 +11,20 @@ import (
 )
 
 const (
-	DEFAULT_WIDTH = 1366
-	DEFAULT_HEIGHT = 768
-	MAX_ITERATIONS = 25
+	DEFAULT_WIDTH      = 1366
+	DEFAULT_HEIGHT     = 768
+	MAX_ITERATIONS     = 25
 	DEFAULT_ITERATIONS = 5
 )
 
 func GetSierpinskiCarpet(ctx iris.Context) {
 	query := ctx.Request().URL.Query()
 	fractal := fractals.SierpinskiCarpet{
-		Width: DEFAULT_WIDTH,
-		Height: DEFAULT_HEIGHT,
+		Width:           DEFAULT_WIDTH,
+		Height:          DEFAULT_HEIGHT,
 		UseRandomColors: true,
-		Iterations: DEFAULT_ITERATIONS,
-		Background: color.RGBA{255, 255, 255, 255},
+		Iterations:      DEFAULT_ITERATIONS,
+		Background:      color.RGBA{255, 255, 255, 255},
 	}
 	if query.Has("width") {
 		width, err := strconv.Atoi(query.Get("width"))
