@@ -64,7 +64,6 @@ func GetSierpinskiCarpet(ctx iris.Context) {
 		fractal.Iterations = iterations
 	}
 	if query.Has("background") {
-		fmt.Printf("background: %s\n", query.Get("background"))
 		background, err := helpers.ParseColor(query.Get("background"))
 		if err != nil {
 			ctx.Text(err.Error())
