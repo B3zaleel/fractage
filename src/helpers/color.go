@@ -46,14 +46,14 @@ func ParseColor(txt string) (color.RGBA, error) {
 			return parser(colorText)
 		}
 	}
-	return color.RGBA{}, errors.New("Invalid color pattern")
+	return ParseNameColor(txt)
 }
 
 // Parses a hexadecimal color value.
 //
 // Format of text: #[0-9a-f]{3, 12}
 func ParseHexColor(txt string) (color.RGBA, error) {
-	valid, err := regexp.Match("^#[0-9a-f]{3, 12}$", []byte(txt))
+	valid, err := regexp.Match("^#[0-9a-f]*$", []byte(txt))
 	if err != nil || !valid {
 		return color.RGBA{}, errors.New("Invalid hex color pattern")
 	}
