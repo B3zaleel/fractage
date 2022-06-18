@@ -73,7 +73,7 @@ func FillRectangle(gc *draw2dimg.GraphicContext, x, y, width, height float64, co
 // Draws a line in an image.
 //  *pt1*: The starting point of the line.
 //  *pt2*: The ending point of the line.
-//  *color*: The color to fill the rectangle with.
+//  *color*: The color to stroke the line with.
 func DrawLine(gc *draw2dimg.GraphicContext, pt1, pt2 Point, color color.RGBA) {
 	gc.SetStrokeColor(color)
 	gc.SetLineWidth(LINE_WIDTH)
