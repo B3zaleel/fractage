@@ -4,12 +4,21 @@ import (
 	"image"
 	"image/color"
 
+	"github.com/llgcode/draw2d"
 	"github.com/llgcode/draw2d/draw2dimg"
 )
 
 const (
 	LINE_WIDTH = 0.2
 )
+
+// Represents a rectangular region.
+type Rect struct {
+	X      float64 `json:"x"`
+	Y      float64 `json:"y"`
+	Width  float64 `json:"width"`
+	Height float64 `json:"height"`
+}
 
 type Point struct {
 	X float64 `json:"x"`
@@ -116,6 +125,24 @@ func DrawFilledTriangle(gc *draw2dimg.GraphicContext, pt1, pt2, pt3 Point, strok
 	gc.LineTo(pt2.X, pt2.Y)
 	gc.LineTo(pt3.X, pt3.Y)
 	gc.LineTo(pt1.X, pt1.Y)
+	gc.Close()
+	gc.FillStroke()
+}
+
+// Adds a pixel to an image.
+//  *x*: The horizontal position of the pixel.
+//  *y*: The vertical position of the pixel.
+func PutPixel(gc *draw2dimg.GraphicContext, x, y float64, color color.RGBA) {
+	gc.SetFillColor(color)
+	gc.SetStrokeColor(color)
+	gc.SetLineWidth(LINE_WIDTH)
+	gc.SetLineJoin(draw2d.MiterJoin)
+	gc.BeginPath()
+	gc.MoveTo(x, y)
+	gc.LineTo(x+LINE_WIDTH/2, y)
+	gc.LineTo(x+LINE_WIDTH/2, y+LINE_WIDTH/2)
+	gc.LineTo(x, y+LINE_WIDTH/2)
+	gc.LineTo(x, y)
 	gc.Close()
 	gc.FillStroke()
 }
