@@ -30,7 +30,7 @@ func (props *Hopalong) WriteImage(output io.Writer) {
 	viewport := image.Rect(0, 0, props.Width, props.Height)
 	img := image.NewRGBA(viewport)
 	gc := draw2dimg.NewGraphicContext(img)
-	bounds := props.calculateBounds(float64(props.Resolution))
+	bounds := props.render(nil, float64(props.Resolution))
 	xScale := float64(props.Width) / bounds.Width
 	yScale := float64(props.Height) / bounds.Height
 	scale := math.Min(xScale, yScale)
@@ -43,11 +43,11 @@ func (props *Hopalong) WriteImage(output io.Writer) {
 }
 
 // Helper function for rendering the Hopalong.
-func (props *Hopalong) render(gc *draw2dimg.GraphicContext, scale float64) {
+func (props *Hopalong) render(gc *draw2dimg.GraphicContext, scale float64) helpers.Rect {
 	x, y, xMax, yMax, t := 0.0, 0.0, 0.0, 0.0, 0.0
 	midX, midY := float64(props.Width)/2.0, float64(props.Height)/2.0
 	ptColor := props.Color
-	if props.UseRandomColors {
+	if props.UseRandomColors && gc != nil {
 		ptColor = helpers.RandomColor()
 	}
 	for i := 0; i < props.Iterations; i++ {
@@ -62,32 +62,16 @@ func (props *Hopalong) render(gc *draw2dimg.GraphicContext, scale float64) {
 				t = x
 				x = y - float64(xSign)*math.Sqrt(math.Abs(float64(props.B)*x-float64(props.C)))
 				y = float64(props.A) - t
-				if props.UseRandomColors && i%50 == 0 {
+				if props.UseRandomColors && i%50 == 0 && gc != nil {
 					ptColor = helpers.RandomColor()
 				}
 				xMax = math.Max(xMax, x)
 				yMax = math.Max(yMax, y)
-				helpers.PutPixel(gc, midX+x*scale, midY-y*scale, ptColor)
+				if gc != nil {
+					helpers.PutPixel(gc, midX+x*scale, midY-y*scale, ptColor)
+				}
 			}
 		}
-	}
-}
-
-// Helper function for calculating the region of the Hopalong.
-func (props *Hopalong) calculateBounds(scale float64) helpers.Rect {
-	x, y, xMax, yMax, t := 0.0, 0.0, 0.0, 0.0, 0.0
-	for i := 0; i < props.Iterations; i++ {
-		xSign := 0
-		if x < 0 {
-			xSign = -1
-		} else if x > 0 {
-			xSign = 1
-		}
-		t = x
-		x = y - float64(xSign)*math.Sqrt(math.Abs(float64(props.B)*x-float64(props.C)))
-		y = float64(props.A) - t
-		xMax = math.Max(xMax, x)
-		yMax = math.Max(yMax, y)
 	}
 	bounds := helpers.Rect{
 		X:      -xMax,
