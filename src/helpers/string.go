@@ -4,6 +4,10 @@ import (
 	"errors"
 )
 
+const (
+	WHITESPACE_CUTSET = " \t\n"
+)
+
 func SubString(text string, start, end int) string {
 	textRunes := []rune(text)
 	startPos := start
