@@ -19,9 +19,10 @@ type ColorPalette struct {
 	Transitions []Transition `yaml:"transitions"`
 }
 
-// Represents a transition of colors.
+// Represents a color transition.
 type Transition struct {
-	Color    string  `yaml:"color"`
+	Color    string `yaml:"color"`
+	_Color   *color.RGBA
 	Position float32 `yaml:"position"`
 }
 
@@ -39,17 +40,31 @@ func (palette *ColorPalette) GetColor(pos float64) (color.RGBA, error) {
 		transitionIdx++
 	}
 	if transitionIdx >= len(palette.Transitions)-1 {
+		if palette.Transitions[transitionIdx]._Color != nil {
+			return *palette.Transitions[transitionIdx]._Color, nil
+		}
 		return ParseColor(palette.Transitions[transitionIdx].Color)
 	}
 	curTransition := palette.Transitions[transitionIdx]
 	nextTransition := palette.Transitions[transitionIdx+1]
-	curColor, err := ParseColor(curTransition.Color)
-	if err != nil {
-		return NIL_COLOR, err
+	var err error
+	var curColor color.RGBA
+	if curTransition._Color != nil {
+		curColor = *curTransition._Color
+	} else {
+		curColor, err = ParseColor(curTransition.Color)
+		if err != nil {
+			return NIL_COLOR, err
+		}
 	}
-	nextColor, err := ParseColor(nextTransition.Color)
-	if err != nil {
-		return NIL_COLOR, err
+	var nextColor color.RGBA
+	if nextTransition._Color != nil {
+		nextColor = *nextTransition._Color
+	} else {
+		nextColor, err = ParseColor(nextTransition.Color)
+		if err != nil {
+			return NIL_COLOR, err
+		}
 	}
 	grad := (value - float64(curTransition.Position))
 	grad /= (float64(nextTransition.Position) - float64(curTransition.Position))
