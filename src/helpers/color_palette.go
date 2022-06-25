@@ -77,6 +77,18 @@ func (palette *ColorPalette) GetColor(pos float64) (color.RGBA, error) {
 	return posColor, nil
 }
 
+// Translate the value of the color transitions for this color palette.
+func (palette *ColorPalette) TranslateColorTransitions() error {
+	for i := 0; i < len(palette.Transitions); i++ {
+		transitionColor, err := ParseColor(palette.Transitions[i].Color)
+		if err != nil {
+			return err
+		}
+		palette.Transitions[i]._Color = &transitionColor
+	}
+	return nil
+}
+
 // Returns the color value of a predetermined color palette that
 // matches the given name.
 func ParseNameColorPalette(name string) (ColorPalette, error) {
