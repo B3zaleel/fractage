@@ -74,7 +74,7 @@ func (props *JuliaSet) render(gc *draw2dimg.GraphicContext) error {
 					return err
 				}
 			}
-			helpers.PutPixel(gc, float64(x), float64(y), pixelColor)
+			helpers.FillRectangle(gc, float64(x), float64(y), 1, 1, pixelColor)
 		}
 	}
 	return nil
