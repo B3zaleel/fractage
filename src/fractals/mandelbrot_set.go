@@ -9,7 +9,6 @@ import (
 	"math/cmplx"
 
 	"github.com/B3zaleel/fractage/src/helpers"
-	"github.com/llgcode/draw2d/draw2dimg"
 )
 
 // Properties of a Mandelbrot set image.
@@ -28,9 +27,8 @@ type MandelbrotSet struct {
 func (props *MandelbrotSet) WriteImage(output io.Writer) error {
 	viewport := image.Rect(0, 0, props.Width, props.Height)
 	img := image.NewRGBA(viewport)
-	gc := draw2dimg.NewGraphicContext(img)
 	helpers.FillImage(img, props.Background)
-	err := props.render(gc, img)
+	err := props.render(img)
 	if err != nil {
 		return err
 	}
@@ -42,7 +40,7 @@ func (props *MandelbrotSet) WriteImage(output io.Writer) error {
 }
 
 // Helper function for rendering the Mandelbrot set.
-func (props *MandelbrotSet) render(gc *draw2dimg.GraphicContext, img *image.RGBA) error {
+func (props *MandelbrotSet) render(img *image.RGBA) error {
 	width, height := float64(props.Width), float64(props.Height)
 	logBailOut := math.Log(props.BailOut)
 	bailOutSq := props.BailOut * props.BailOut
@@ -68,7 +66,6 @@ func (props *MandelbrotSet) render(gc *draw2dimg.GraphicContext, img *image.RGBA
 				if x2+y2 > bailOutSq {
 					break
 				}
-				// Z = complex(real(Z)*imag(Z)*2+imag(C), x2-y2+real(C))
 				Z = cmplx.Pow(Z, complex(props.M, 0)) + C
 				n++
 			}
@@ -84,8 +81,7 @@ func (props *MandelbrotSet) render(gc *draw2dimg.GraphicContext, img *image.RGBA
 					return err
 				}
 			}
-			// img.Set(x, y, pixelColor)
-			helpers.FillRectangle(gc, float64(x), float64(y), 1, 1, pixelColor)
+			img.Set(x, y, pixelColor)
 		}
 	}
 	return nil
