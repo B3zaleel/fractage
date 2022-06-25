@@ -10,6 +10,7 @@ func AddRoutes(app *iris.Application) {
 	app.Get("/cantor-dust", controllers.GetCantorDust)
 	app.Get("/cantor-set", controllers.GetCantorSet)
 	app.Get("/hopalong", controllers.GetHopalong)
+	app.Get("/julia-set", controllers.GetJuliaSet)
 	app.Get("/sierpinski-carpet", controllers.GetSierpinskiCarpet)
 	app.Get("/sierpinski-triangle", controllers.GetSierpinskiTriangle)
 }
