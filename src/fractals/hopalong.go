@@ -11,7 +11,7 @@ import (
 	"github.com/llgcode/draw2d/draw2dimg"
 )
 
-// Properties of a Sierpinski triangle image.
+// Properties of a Hopalong image.
 type Hopalong struct {
 	Width           int
 	Height          int
