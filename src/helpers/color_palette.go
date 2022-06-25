@@ -28,27 +28,27 @@ type Transition struct {
 
 // Gets the color value of a given position in this ColorPalette.
 func (palette *ColorPalette) GetColor(pos float64) (color.RGBA, error) {
-	if len(palette.Transitions) == 0 {
+	if palette.Transitions == nil || len(palette.Transitions) == 0 {
 		return NIL_COLOR, errors.New("ColorPalette has no color transitions")
 	}
 	value := math.Max(0, math.Min(1.0, pos))
-	transitionIdx := 0
-	for i := 0; i < len(palette.Transitions); i++ {
-		if value >= float64(palette.Transitions[i].Position) {
-			break
-		}
-		transitionIdx++
+	idx := 0
+	for (idx < len(palette.Transitions)) && (value >= float64(palette.Transitions[idx].Position)) {
+		idx++
 	}
-	if transitionIdx >= len(palette.Transitions)-1 {
-		if palette.Transitions[transitionIdx]._Color != nil {
-			return *palette.Transitions[transitionIdx]._Color, nil
-		}
-		return ParseColor(palette.Transitions[transitionIdx].Color)
+	if idx > 0 {
+		idx--
 	}
-	curTransition := palette.Transitions[transitionIdx]
-	nextTransition := palette.Transitions[transitionIdx+1]
+	curTransition := palette.Transitions[idx]
+	if idx >= len(palette.Transitions)-1 {
+		if palette.Transitions[idx]._Color != nil {
+			return *palette.Transitions[idx]._Color, nil
+		}
+		return ParseColor(palette.Transitions[idx].Color)
+	}
+	nextTransition := palette.Transitions[idx+1]
 	var err error
-	var curColor color.RGBA
+	var curColor, nextColor color.RGBA
 	if curTransition._Color != nil {
 		curColor = *curTransition._Color
 	} else {
@@ -57,7 +57,6 @@ func (palette *ColorPalette) GetColor(pos float64) (color.RGBA, error) {
 			return NIL_COLOR, err
 		}
 	}
-	var nextColor color.RGBA
 	if nextTransition._Color != nil {
 		nextColor = *nextTransition._Color
 	} else {
