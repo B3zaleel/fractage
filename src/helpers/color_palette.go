@@ -72,9 +72,9 @@ func (palette *ColorPalette) GetColor(pos float64) (color.RGBA, error) {
 	grad := (value - float64(curTransition.Position))
 	grad /= (float64(nextTransition.Position) - float64(curTransition.Position))
 	posColor := color.RGBA{
-		R: curColor.R + uint8(grad)*(nextColor.R-curColor.R),
-		G: curColor.G + uint8(grad)*(nextColor.G-curColor.G),
-		B: curColor.B + uint8(grad)*(nextColor.B-curColor.B),
+		R: curColor.R + uint8(grad*float64(nextColor.R-curColor.R)),
+		G: curColor.G + uint8(grad*float64(nextColor.G-curColor.G)),
+		B: curColor.B + uint8(grad*float64(nextColor.B-curColor.B)),
 		A: 255,
 	}
 	return posColor, nil
