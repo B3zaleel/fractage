@@ -32,15 +32,15 @@
       position: 1.0
 - name: fire
   transitions:
-    - color: "#ffe808"
+    - color: "rgb(0, 0, 0)"
       position: 0.0
-    - color: "#ffce00"
+    - color: "rgb(255, 0, 0)"
       position: 0.25
-    - color: "#ff9a00"
+    - color: "rgb(255, 255, 0)"
       position: 0.5
-    - color: "#ff5a00"
+    - color: "rgb(255, 255, 255)"
       position: 0.75
-    - color: "#ff0000"
+    - color: "rgb(0, 0, 0)"
       position: 1.0
 - name: monochrome
   transitions:
