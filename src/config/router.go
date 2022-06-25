@@ -7,6 +7,8 @@ import (
 
 // Adds all routes to the given iris application.
 func AddRoutes(app *iris.Application) {
+	app.Get("/palette", controllers.GetPalette)
+
 	app.Get("/cantor-dust", controllers.GetCantorDust)
 	app.Get("/cantor-set", controllers.GetCantorSet)
 	app.Get("/hopalong", controllers.GetHopalong)
