@@ -2,10 +2,14 @@ package helpers
 
 import (
 	"errors"
+	"image"
 	"image/color"
+	"image/png"
+	"io"
 	"math"
 	"os"
 
+	"github.com/llgcode/draw2d/draw2dimg"
 	"gopkg.in/yaml.v3"
 )
 
@@ -84,6 +88,33 @@ func (palette *ColorPalette) TranslateColorTransitions() error {
 			return err
 		}
 		palette.Transitions[i]._Color = &transitionColor
+	}
+	return nil
+}
+
+// Displays an image of this palette to the given output.
+func (palette *ColorPalette) Render(output io.Writer, width, height int, step float64) error {
+	viewport := image.Rect(0, 0, width, height)
+	img := image.NewRGBA(viewport)
+	gc := draw2dimg.NewGraphicContext(img)
+	err := palette.TranslateColorTransitions()
+	if err != nil {
+		return err
+	}
+	if step <= 0 {
+		return errors.New("steps between transitions must be greater than 0")
+	}
+	for x := 0.0; x <= float64(width); x += step {
+		pos := x / float64(width)
+		curColor, err := palette.GetColor(pos)
+		if err != nil {
+			return err
+		}
+		FillRectangle(gc, x, 0.0, step, float64(height), curColor)
+	}
+	err = png.Encode(output, img)
+	if err != nil {
+		return err
 	}
 	return nil
 }
