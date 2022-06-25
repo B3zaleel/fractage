@@ -57,14 +57,14 @@ func (props *JuliaSet) render(gc *draw2dimg.GraphicContext) error {
 		for x := 0; x < int(width); x++ {
 			n = 0
 			Z := complex(xOffset+float64(x)*step, yOffset+float64(y)*step)
-			tmp := math.Exp(-cmplx.Abs(Z))
+			seriesValue := math.Exp(-cmplx.Abs(Z))
 			for (n < props.MaxIterations) && (cmplx.Abs(Z) < props.BailOut) {
 				Z = Z*Z + props.C
-				tmp += math.Exp(-cmplx.Abs(Z))
+				seriesValue += math.Exp(-cmplx.Abs(Z))
 				n++
 			}
 			if n < props.MaxIterations {
-				pixelColor, err = props.ColorPalette.GetColor(tmp / float64(props.MaxIterations))
+				pixelColor, err = props.ColorPalette.GetColor(seriesValue / float64(props.MaxIterations))
 				if err != nil {
 					return err
 				}
