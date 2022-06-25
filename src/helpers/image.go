@@ -44,10 +44,10 @@ func FillImage(image *image.RGBA, color color.RGBA) {
 //  *y*: The vertical offset of the rectangle.
 //  *width*: The width of the rectangle.
 //  *height*: The height of the rectangle.
-//  *color*: The color to fill the rectangle with.
+//  *color*: The color to stroke the rectangle with.
 func DrawRectangle(gc *draw2dimg.GraphicContext, x, y, width, height float64, color color.RGBA) {
 	gc.SetStrokeColor(color)
-	gc.SetLineWidth(0.2)
+	gc.SetLineWidth(LINE_WIDTH)
 	gc.BeginPath()
 	gc.MoveTo(x, y)
 	gc.LineTo(x+width, y)
@@ -68,7 +68,7 @@ func DrawRectangle(gc *draw2dimg.GraphicContext, x, y, width, height float64, co
 func FillRectangle(gc *draw2dimg.GraphicContext, x, y, width, height float64, color color.RGBA) {
 	gc.SetFillColor(color)
 	gc.SetStrokeColor(color)
-	gc.SetLineWidth(0.2)
+	gc.SetLineWidth(LINE_WIDTH)
 	gc.BeginPath()
 	gc.MoveTo(x, y)
 	gc.LineTo(x+width, y)
