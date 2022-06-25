@@ -9,7 +9,6 @@ import (
 	"math/cmplx"
 
 	"github.com/B3zaleel/fractage/src/helpers"
-	"github.com/llgcode/draw2d/draw2dimg"
 )
 
 // Properties of a Julia set image.
@@ -28,9 +27,8 @@ type JuliaSet struct {
 func (props *JuliaSet) WriteImage(output io.Writer) error {
 	viewport := image.Rect(0, 0, props.Width, props.Height)
 	img := image.NewRGBA(viewport)
-	gc := draw2dimg.NewGraphicContext(img)
 	helpers.FillImage(img, props.Background)
-	err := props.render(gc)
+	err := props.render(img)
 	if err != nil {
 		return err
 	}
@@ -42,7 +40,7 @@ func (props *JuliaSet) WriteImage(output io.Writer) error {
 }
 
 // Helper function for rendering the Julia set.
-func (props *JuliaSet) render(gc *draw2dimg.GraphicContext) error {
+func (props *JuliaSet) render(img *image.RGBA) error {
 	width, height := float64(props.Width), float64(props.Height)
 	step := math.Max(props.Region.Width/width, props.Region.Height/height)
 	xOffset := props.Region.X - (width*step-props.Region.Width)/2.0
@@ -74,7 +72,7 @@ func (props *JuliaSet) render(gc *draw2dimg.GraphicContext) error {
 					return err
 				}
 			}
-			helpers.FillRectangle(gc, float64(x), float64(y), 1, 1, pixelColor)
+			img.Set(x, y, pixelColor)
 		}
 	}
 	return nil
