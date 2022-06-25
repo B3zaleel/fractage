@@ -116,7 +116,7 @@ func ParseRGBColor(txt string) (color.RGBA, error) {
 		return color.RGBA{}, errors.New("Invalid rgb color pattern")
 	}
 	start := 4
-	if txt[start] == 'a' {
+	if txt[start-1] == 'a' {
 		start++
 	}
 	valuesTxt := SubString(txt, start, -1)
