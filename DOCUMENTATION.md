@@ -50,7 +50,7 @@ http://localhost:6060/sierpinski-carpet
 
 #### Variant 1
 
-**Format:** `rgb(<int>, <int>, <int>)`<br/> or `rgba(<int>, <int>, <int>, <int>)`<br/>
+**Format:** `rgb(<int>, <int>, <int>)` or `rgba(<int>, <int>, <int>, <int>)`<br/>
 **Definition:** A color defined using the `rgb` or `rgb` format, where the `<int>` values are in the range 0-255 inclusive.<br/>
 **Example:** `rgb(125, 25, 35)`
 
