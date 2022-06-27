@@ -46,7 +46,7 @@ curl http://localhost:6060/sierpinski-carpet
 
 #### Variant 3
 
-**Format:** `[a-fA-F_]+`<br/>
+**Format:** `[a-zA-Z_]+`<br/>
 **Definition:** A named color that has been defined in [colors.yaml](src/data/colors.yaml).<br/>
 **Example:** `slategray`
 
