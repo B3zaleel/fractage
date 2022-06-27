@@ -8,9 +8,25 @@ All query parameters are optional.
 
 ### Sierpinski Carpet
 
-```powershell
-curl http://localhost:6060/sierpinski-carpet
+```yaml
+http://localhost:6060/sierpinski-carpet
 ```
+
+#### Parameters
+
++ **iterations:**
+  + _Definition:_ The number of iterations that should be displayed.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 25 inclusive.
+  + _Default:_ 5
++ **color:**
+  + _Definition:_ The color for drawing the boxes.
+  + _Type:_ [Color](#color-type)
+  + _Default:_ random colors.
+
+#### Sample
+
+![Image of a sierpinski carpet with 5 iterations](assets/examples/sierpinski-carpet.png)
 
 ## Type Definitions
 
