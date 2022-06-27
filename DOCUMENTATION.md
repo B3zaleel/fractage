@@ -31,13 +31,13 @@ curl localhost:6060/sierpinski-carpet
 #### Variant 1
 
 **Format:** `<float>, <float>, <float>, <float>`<br/>
-**Definition:** 4 comma-separated float values representing the _x_ positions, _y_ position, _width_ and _height_ of a rectangular area.<br/>
+**Definition:** 4 comma-separated float values representing the _x_ position, _y_ position, _width_ and _height_ of a rectangular area.<br/>
 **Alias:** `<rect>`<br/>
 **Example:** `1.13, 2, 9.8, 7`
 
 #### Variant 2
 
 **Format:** `<float>, <float>`<br/>
-**Definition:** 2 comma-separated float values representing the _width_ and _height_ of a rectangular area. _x_ and _y_ values are 0.<br/>
+**Definition:** 2 comma-separated float values representing the _width_ and _height_ of a rectangular area. The _x_ and _y_ positions would be 0.<br/>
 **Alias:** `<rect>`<br/>
 **Example:** `7.68, 7.86`
