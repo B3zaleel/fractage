@@ -158,4 +158,4 @@ http://localhost:6060/sierpinski-triangle
 **Format:** `(<float>([a-zA-Z](^<int>)?)?)+`<br/>
 **Definition:** A simple polynomial expression.<br/>
 **Alias:** `<poly_expr>`<br/>
-**Example:** `$3 + 2.3x - x^5$`
+**Example:** `$3 + 2.3x - x^5$` for $3 + 2.3x - x^5$
