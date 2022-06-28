@@ -28,6 +28,33 @@ http://localhost:6060/cantor-dust
 
 ![Image of a Cantor dust with 5 iterations](assets/examples/cantor-dust.png)
 
+### Cantor Set
+
+```yaml
+http://localhost:6060/cantor-set
+```
+
+#### Parameters
+
++ **iterations:**
+  + _Definition:_ The number of iterations that should be displayed.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 25 inclusive.
+  + _Default:_ 5
++ **line_height:**
+  + _Definition:_ The height of each line.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 30 inclusive.
+  + _Default:_ 5
++ **color:**
+  + _Definition:_ The color for drawing the lines.
+  + _Type:_ [Color](#color-type)
+  + _Default:_ random colors.
+
+#### Sample
+
+![Image of a Cantor set with 5 iterations and a line height of 5](assets/examples/cantor-set.png)
+
 ### Sierpinski Carpet
 
 ```yaml
