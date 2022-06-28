@@ -115,6 +115,13 @@ http://localhost:6060/sierpinski-triangle
 **Alias:** `<float>`<br/>
 **Example:** `7.68`
 
+### Complex Type
+
+**Format:** `<float>([+-]<float>i)?`<br/>
+**Definition:** A complex number consisting of 64-bit floating point real and imaginary parts.<br/>
+**Alias:** `<cmplx>`<br/>
+**Example:** `7.68 + 3i`
+
 ### Color Type
 
 **Alias:** `<color>`
