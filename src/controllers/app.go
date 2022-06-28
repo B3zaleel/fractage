@@ -56,7 +56,7 @@ func GetPalette(ctx iris.Context) {
 	if query.Has("value") {
 		colorPaletteValue = query.Get("value")
 	}
-	colorPalette, err := helpers.ParseNameColorPalette(colorPaletteValue)
+	colorPalette, err := helpers.ParseColorPalette(colorPaletteValue)
 	if err != nil {
 		ctx.Text(err.Error())
 		return

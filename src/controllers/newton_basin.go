@@ -98,7 +98,7 @@ func GetNewtonBasin(ctx iris.Context) {
 		return
 	}
 	fractal.Polynomial = polynomial
-	colorPalette, err := helpers.ParseNameColorPalette(colorPaletteValue)
+	colorPalette, err := helpers.ParseColorPalette(colorPaletteValue)
 	if err != nil {
 		ctx.Text(err.Error())
 		return

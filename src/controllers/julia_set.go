@@ -94,7 +94,7 @@ func GetJuliaSet(ctx iris.Context) {
 		ctx.Text(err.Error())
 		return
 	}
-	colorPalette, err := helpers.ParseNameColorPalette(colorPaletteValue)
+	colorPalette, err := helpers.ParseColorPalette(colorPaletteValue)
 	if err != nil {
 		ctx.Text(err.Error())
 		return
