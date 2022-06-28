@@ -11,13 +11,15 @@ import (
 )
 
 const (
-	HOPALONG_MAX_ITERATIONS     = 2_000_000_000
 	HOPALONG_MAX_RESOLUTION     = 15
-	HOPALONG_DEFAULT_ITERATIONS = 10_000_000
-	HOPALONG_DEFAULT_RESOLUTION = 2
+	HOPALONG_DEFAULT_RESOLUTION = 5
 	HOPALONG_DEFAULT_A          = 2
 	HOPALONG_DEFAULT_B          = 1
 	HOPALONG_DEFAULT_C          = 0
+	HOPALONG_DEFAULT_D          = 0
+	HOPALONG_DEFAULT_X          = 0
+	HOPALONG_DEFAULT_Y          = 0
+	HOPALONG_DEFAULT_Scale      = 1
 )
 
 func GetHopalong(ctx iris.Context) {
@@ -28,8 +30,11 @@ func GetHopalong(ctx iris.Context) {
 		A:               HOPALONG_DEFAULT_A,
 		B:               HOPALONG_DEFAULT_B,
 		C:               HOPALONG_DEFAULT_C,
+		D:               HOPALONG_DEFAULT_D,
+		X:               HOPALONG_DEFAULT_X,
+		Y:               HOPALONG_DEFAULT_Y,
+		Scale:           HOPALONG_DEFAULT_Scale,
 		UseRandomColors: true,
-		Iterations:      HOPALONG_DEFAULT_ITERATIONS,
 		Resolution:      HOPALONG_DEFAULT_RESOLUTION,
 		Background:      color.RGBA{255, 255, 255, 255},
 	}
@@ -57,18 +62,6 @@ func GetHopalong(ctx iris.Context) {
 		}
 		fractal.Color = color
 		fractal.UseRandomColors = false
-	}
-	if query.Has("iterations") {
-		iterations, err := strconv.Atoi(query.Get("iterations"))
-		if err != nil {
-			ctx.Text(err.Error())
-			return
-		}
-		if iterations < 0 || iterations > HOPALONG_MAX_ITERATIONS {
-			ctx.Text(fmt.Sprintf("Too many iterations. Max: %d\n", HOPALONG_MAX_ITERATIONS))
-			return
-		}
-		fractal.Iterations = iterations
 	}
 	if query.Has("resolution") {
 		resolution, err := strconv.Atoi(query.Get("resolution"))
@@ -105,6 +98,38 @@ func GetHopalong(ctx iris.Context) {
 			return
 		}
 		fractal.C = c
+	}
+	if query.Has("d") {
+		d, err := strconv.ParseFloat(query.Get("d"), 32)
+		if err != nil {
+			ctx.Text(err.Error())
+			return
+		}
+		fractal.D = d
+	}
+	if query.Has("x") {
+		x, err := strconv.ParseFloat(query.Get("x"), 32)
+		if err != nil {
+			ctx.Text(err.Error())
+			return
+		}
+		fractal.X = x
+	}
+	if query.Has("y") {
+		y, err := strconv.ParseFloat(query.Get("y"), 32)
+		if err != nil {
+			ctx.Text(err.Error())
+			return
+		}
+		fractal.Y = y
+	}
+	if query.Has("scale") {
+		scale, err := strconv.ParseFloat(query.Get("scale"), 32)
+		if err != nil {
+			ctx.Text(err.Error())
+			return
+		}
+		fractal.Scale = scale
 	}
 	if query.Has("background") {
 		background, err := helpers.ParseColor(query.Get("background"))
