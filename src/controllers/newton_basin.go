@@ -23,11 +23,12 @@ const (
 func GetNewtonBasin(ctx iris.Context) {
 	query := ctx.Request().URL.Query()
 	fractal := fractals.NewtonBasin{
-		Width:         DEFAULT_WIDTH,
-		Height:        DEFAULT_HEIGHT,
-		MaxIterations: NEWTON_BASIN_DEFAULT_ITERATIONS,
-		BailOut:       NEWTON_BASIN_DEFAULT_BAIL_OUT,
-		Background:    color.RGBA{255, 255, 255, 255},
+		Width:            DEFAULT_WIDTH,
+		Height:           DEFAULT_HEIGHT,
+		MaxIterations:    NEWTON_BASIN_DEFAULT_ITERATIONS,
+		BailOut:          NEWTON_BASIN_DEFAULT_BAIL_OUT,
+		UseDynamicColors: true,
+		Background:       color.RGBA{255, 255, 255, 255},
 	}
 	colorPaletteValue := NEWTON_BASIN_DEFAULT_COLOR_PALETTE
 	regionValue := NEWTON_BASIN_DEFAULT_REGION
@@ -53,6 +54,7 @@ func GetNewtonBasin(ctx iris.Context) {
 	}
 	if query.Has("color_palette") {
 		colorPaletteValue = query.Get("color_palette")
+		fractal.UseDynamicColors = false
 	}
 	if query.Has("iterations") {
 		iterations, err := strconv.Atoi(query.Get("iterations"))

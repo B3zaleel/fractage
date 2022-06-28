@@ -13,19 +13,20 @@ import (
 )
 
 const (
-	MAX_DELTA = 1e-15
+	MAX_DELTA = 1e-14
 )
 
 // Properties of a Newton basin image.
 type NewtonBasin struct {
-	Width         int
-	Height        int
-	ColorPalette  helpers.ColorPalette
-	MaxIterations int
-	Polynomial    math_helpers.CmplxPolynomial
-	BailOut       float64
-	Region        helpers.Rect
-	Background    color.RGBA
+	Width            int
+	Height           int
+	ColorPalette     helpers.ColorPalette
+	MaxIterations    int
+	Polynomial       math_helpers.CmplxPolynomial
+	BailOut          float64
+	Region           helpers.Rect
+	Background       color.RGBA
+	UseDynamicColors bool
 }
 
 // Writes the Newton basin image to the given output.
@@ -58,8 +59,8 @@ func (props *NewtonBasin) render(img *image.RGBA) error {
 	var n int
 	poly := props.Polynomial
 	polyDeriv := props.Polynomial.FirstDerivative()
-	for y := 0; y < int(height); y++ {
-		for x := 0; x < int(width); x++ {
+	for y := 0; y <= int(height); y++ {
+		for x := 0; x <= int(width); x++ {
 			n = 0
 			Z := complex(xOffset+float64(x)*step, yOffset+float64(y)*step)
 			delta := Z
@@ -71,17 +72,21 @@ func (props *NewtonBasin) render(img *image.RGBA) error {
 				n++
 			}
 			mag := float64(props.MaxIterations-n) / float64(props.MaxIterations)
-			var angle float64
-			if Z == 0+0i {
-				angle = 0
+			if props.UseDynamicColors {
+				var angle float64
+				if Z == 0+0i {
+					angle = 0
+				} else {
+					angle = cmplx.Phase(Z)
+				}
+				pixelColor = color.RGBA{
+					R: uint8(255 * mag * (math.Sin(angle)/2 + 0.5)),
+					G: uint8(255 * mag * (math.Sin(angle+1*math.Pi/3)/2 + 0.5)),
+					B: uint8(255 * mag * (math.Sin(angle+5*math.Pi/3)/2 + 0.5)),
+					A: 255,
+				}
 			} else {
-				angle = cmplx.Phase(Z)
-			}
-			pixelColor = color.RGBA{
-				R: uint8(255 * mag * (math.Sin(angle)/2 + 0.5)),
-				G: uint8(255 * mag * (math.Sin(angle+2*math.Pi/3)/2 + 0.5)),
-				B: uint8(255 * mag * (math.Sin(angle+4*math.Pi/3)/2 + 0.5)),
-				A: 255,
+				pixelColor, err = props.ColorPalette.GetColor(mag)
 			}
 			img.Set(x, y, pixelColor)
 		}
