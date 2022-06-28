@@ -6,6 +6,28 @@ All query parameters are optional.
 
 ### Fractals
 
+### Cantor Dust
+
+```yaml
+http://localhost:6060/cantor-dust
+```
+
+#### Parameters
+
++ **iterations:**
+  + _Definition:_ The number of iterations that should be displayed.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 25 inclusive.
+  + _Default:_ 5
++ **color:**
+  + _Definition:_ The color for drawing the boxes.
+  + _Type:_ [Color](#color-type)
+  + _Default:_ random colors.
+
+#### Sample
+
+![Image of a Cantor dust with 5 iterations](assets/examples/cantor-dust.png)
+
 ### Sierpinski Carpet
 
 ```yaml
@@ -26,7 +48,7 @@ http://localhost:6060/sierpinski-carpet
 
 #### Sample
 
-![Image of a sierpinski carpet with 5 iterations](assets/examples/sierpinski-carpet.png)
+![Image of a Sierpinski carpet with 5 iterations](assets/examples/sierpinski-carpet.png)
 
 ## Type Definitions
 
