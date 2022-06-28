@@ -2,12 +2,15 @@ package helpers
 
 import (
 	"errors"
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
 	"io"
 	"math"
 	"os"
+	"strconv"
+	"strings"
 
 	"github.com/llgcode/draw2d/draw2dimg"
 	"gopkg.in/yaml.v3"
@@ -117,6 +120,46 @@ func (palette *ColorPalette) Render(output io.Writer, width, height int, step fl
 		return err
 	}
 	return nil
+}
+
+// Parses a string into a color palette.
+func ParseColorPalette(txt string) (ColorPalette, error) {
+	text := strings.Trim(txt, WHITESPACE_CUTSET)
+	palette, err := ParseNameColorPalette(text)
+	if err == nil {
+		return palette, err
+	}
+	nilPalette := ColorPalette{
+		Name:        "",
+		Transitions: nil,
+	}
+	values, err := GetCSV(text)
+	if len(values)%2 != 0 {
+		return nilPalette, errors.New("Invalid color palette")
+	}
+	transitions := make([]Transition, len(values)/2)
+	for i, j := 0, 0; i < len(values); i += 2 {
+		_, err := ParseColor(values[i])
+		if err != nil {
+			return nilPalette, err
+		}
+		position, err := strconv.ParseFloat(values[i+1], 32)
+		if err != nil {
+			return nilPalette, err
+		}
+		if j == 0 && position != 0.0 {
+			return nilPalette, errors.New("The first position must be 0")
+		}
+		if j == len(values)/2-1 && position != 1.0 {
+			return nilPalette, errors.New("The last position must be 1")
+		}
+		transitions[j] = Transition{
+			Color:    values[i],
+			Position: float32(position),
+		}
+		j++
+	}
+	return ColorPalette{Name: "custom_palette", Transitions: transitions}, nil
 }
 
 // Returns the color value of a predetermined color palette that
