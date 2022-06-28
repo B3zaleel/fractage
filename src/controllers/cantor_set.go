@@ -62,8 +62,8 @@ func GetCantorSet(ctx iris.Context) {
 		}
 		fractal.Iterations = iterations
 	}
-	if query.Has("lineHeight") {
-		lineHeight, err := strconv.ParseFloat(query.Get("lineHeight"), 32)
+	if query.Has("line_height") {
+		lineHeight, err := strconv.ParseFloat(query.Get("line_height"), 32)
 		if err != nil {
 			ctx.Text(err.Error())
 			return
