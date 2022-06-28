@@ -152,3 +152,10 @@ http://localhost:6060/sierpinski-triangle
 **Format:** `<float>, <float>`<br/>
 **Definition:** 2 comma-separated float values representing the _width_ and _height_ of a rectangular area. The _x_ and _y_ positions would be 0.<br/>
 **Example:** `7.68, 7.86`
+
+### Polynomial Type
+
+**Format:** `(<float>([a-zA-Z](^<int>)?)?)+`<br/>
+**Definition:** A simple polynomial expression.<br/>
+**Alias:** `<poly_expr>`<br/>
+**Example:** `$3 + 2.3x - x^5$`
