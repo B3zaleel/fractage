@@ -10,6 +10,15 @@ import (
 	"github.com/B3zaleel/fractage/src/helpers"
 )
 
+var (
+	HOPALONG_TYPES = map[string]func(props *Hopalong, xIn, yIn float64) (xOut, yOut float64){
+		"classic_bm":      classic_barry_martin_fractal,
+		"positive_bm":     positive_barry_martin_fractal,
+		"additive_bm":     additive_barry_martin_fractal,
+		"gingerbread_man": gingerbread_man_fractal,
+	}
+)
+
 // Properties of a Hopalong image.
 type Hopalong struct {
 	Width           int
@@ -22,6 +31,7 @@ type Hopalong struct {
 	D               float64
 	X               float64
 	Y               float64
+	Type            string
 	Scale           float64
 	Resolution      int
 	Background      color.RGBA
@@ -41,24 +51,17 @@ func (props *Hopalong) WriteImage(output io.Writer) {
 
 // Helper function for rendering the Hopalong.
 func (props *Hopalong) render(img *image.RGBA) {
-	x, y, t := props.X, props.Y, 0.0
+	x, y := props.X, props.Y
 	midX, midY := float64(props.Width)/2.0, float64(props.Height)/2.0
 	ptColor := props.Color
 	if props.UseRandomColors {
 		ptColor = helpers.RandomColor()
 	}
+	hopalong_fxn := HOPALONG_TYPES[props.Type]
 	for i := 0; i < props.Width; i++ {
 		for j := 0; j < props.Height; j++ {
 			for k := 0; k < props.Resolution; k++ {
-				xSign := 0
-				if x < 0 {
-					xSign = -1
-				} else if x > 0 {
-					xSign = 1
-				}
-				t = x
-				x = y - float64(xSign)*math.Sqrt(math.Abs(float64(props.B)*x-float64(props.C)))
-				y = float64(props.A) - t
+				x, y = hopalong_fxn(props, x, y)
 				if props.UseRandomColors && i%50 == 0 {
 					ptColor = helpers.RandomColor()
 				}
@@ -66,4 +69,40 @@ func (props *Hopalong) render(img *image.RGBA) {
 			}
 		}
 	}
+}
+
+func classic_barry_martin_fractal(props *Hopalong, xIn, yIn float64) (xOut, yOut float64) {
+	xSign := 0
+	if xIn < 0 {
+		xSign = -1
+	} else if xIn > 0 {
+		xSign = 1
+	}
+	xOut = yIn - float64(xSign)*math.Sqrt(math.Abs(float64(props.B)*xIn-float64(props.C)))
+	yOut = float64(props.A) - xIn
+	return
+}
+
+func positive_barry_martin_fractal(props *Hopalong, xIn, yIn float64) (xOut, yOut float64) {
+	xSign := 0
+	if xIn < 0 {
+		xSign = -1
+	} else if xIn > 0 {
+		xSign = 1
+	}
+	xOut = yIn + float64(xSign)*math.Sqrt(math.Abs(float64(props.B)*xIn-float64(props.C)))
+	yOut = float64(props.A) - xIn
+	return
+}
+
+func additive_barry_martin_fractal(props *Hopalong, xIn, yIn float64) (xOut, yOut float64) {
+	xOut = yIn + math.Sqrt(math.Abs(float64(props.B)*xIn-float64(props.C)))
+	yOut = float64(props.A) - xIn
+	return
+}
+
+func gingerbread_man_fractal(props *Hopalong, xIn, yIn float64) (xOut, yOut float64) {
+	xOut = yIn + math.Abs(float64(props.B)*xIn)
+	yOut = float64(props.A) - xIn
+	return
 }

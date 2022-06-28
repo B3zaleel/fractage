@@ -20,6 +20,7 @@ const (
 	HOPALONG_DEFAULT_X          = 0
 	HOPALONG_DEFAULT_Y          = 0
 	HOPALONG_DEFAULT_Scale      = 1
+	HOPALONG_DEFAULT_FXN_TYPE   = "classic_bm"
 )
 
 func GetHopalong(ctx iris.Context) {
@@ -33,6 +34,7 @@ func GetHopalong(ctx iris.Context) {
 		D:               HOPALONG_DEFAULT_D,
 		X:               HOPALONG_DEFAULT_X,
 		Y:               HOPALONG_DEFAULT_Y,
+		Type:            HOPALONG_DEFAULT_FXN_TYPE,
 		Scale:           HOPALONG_DEFAULT_Scale,
 		UseRandomColors: true,
 		Resolution:      HOPALONG_DEFAULT_RESOLUTION,
@@ -130,6 +132,21 @@ func GetHopalong(ctx iris.Context) {
 			return
 		}
 		fractal.Scale = scale
+	}
+	if query.Has("type") {
+		fxnType := query.Get("type")
+		validFxn := false
+		for k := range fractals.HOPALONG_TYPES {
+			if k == fxnType {
+				validFxn = true
+				break
+			}
+		}
+		if !validFxn {
+			ctx.Text("Invalid function type")
+			return
+		}
+		fractal.Type = fxnType
 	}
 	if query.Has("background") {
 		background, err := helpers.ParseColor(query.Get("background"))
