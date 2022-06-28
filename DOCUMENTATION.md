@@ -158,4 +158,21 @@ http://localhost:6060/sierpinski-triangle
 **Format:** `(<float>([a-zA-Z](^<int>)?)?)+`<br/>
 **Definition:** A simple polynomial expression.<br/>
 **Alias:** `<poly_expr>`<br/>
-**Example:** `$3 + 2.3x - x^5$` for $3 + 2.3x - x^5$
+**Example:** `3 + 2.3x - x^5` for $3 + 2.3x - x^5$
+
+### Color Palette Type
+
+**Alias:** `<color_palette>`
+
+#### Variant 1
+
+**Format:** `[a-zA-Z_]+`<br/>
+**Definition:** A named color palette that has been defined in [color_palettes.yaml](src/data/color_palettes.yaml).<br/>
+**Example:** `orange_blue`
+
+#### Variant 2
+
+**NOTE:** Not yet implemented.<br/>
+**Format:** `("<color>", <float>,)+`<br/>
+**Defininition:** A comma-separated list of colors and positions in increasing order. Each position has to be a `<float>` type in the range of 0 to 1 inclusive. Colors defined using the `rgb` format should be enclosed in double quotes.<br/>
+**Example:** `slategray, 0.0, %23808080, 0.45, %22rgb(200, 200, 200)%22, 1.0`
