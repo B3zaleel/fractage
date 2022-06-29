@@ -55,6 +55,40 @@ http://localhost:6060/cantor-set
 
 ![Image of a Cantor set with 5 iterations and a line height of 5](assets/examples/cantor-set.png)
 
+### Julia Set
+
+```yaml
+http://localhost:6060/julia-set
+```
+
+#### Parameters
+
++ **iterations:**
+  + _Definition:_ The maximum number of iterations that should performed for each pixel.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 500,000 inclusive.
+  + _Default:_ 250
++ **c:**
+  + _Definition:_ The value of $c$ in the equation $z = z^2 + c$.
+  + _Type:_ [Complex](#complex-type)
+  + _Default:_ -0.5 + 0.6i
++ **bail_out:**
+  + _Definition:_ The value at which the series diverges.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 2
++ **region:**
+  + _Definition:_ The region of the infinite plane to display.
+  + _Type:_ [Rectangle](#rectangle-type)
+  + _Default:_ -1.5, -1.5, 3, 3
++ **color_palette:**
+  + _Definition:_ The color palette for coloring the pixels.
+  + _Type:_ [ColorPalette](#color-palette-type)
+  + _Default:_ orange_blue.
+
+#### Sample
+
+![Image of a Julia set in the region -1.5, -1.5, 3, 3, with 250 iterations, c = -0.5 + 0.6i, and a bail out of 2](assets/examples/julia-set.png)
+
 ### Sierpinski Carpet
 
 ```yaml
