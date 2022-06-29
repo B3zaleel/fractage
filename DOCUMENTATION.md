@@ -64,7 +64,7 @@ http://localhost:6060/julia-set
 #### Parameters
 
 + **iterations:**
-  + _Definition:_ The maximum number of iterations that should performed for each pixel.
+  + _Definition:_ The maximum number of iterations that should be performed for each pixel.
   + _Type:_ [Integer](#integer-type)
   + _Range:_ 0 to 500,000 inclusive.
   + _Default:_ 250
@@ -88,6 +88,40 @@ http://localhost:6060/julia-set
 #### Sample
 
 ![Image of a Julia set in the region -1.5, -1.5, 3, 3, with 250 iterations, c = -0.5 + 0.6i, and a bail out of 2](assets/examples/julia-set.png)
+
+### Newton Basin
+
+```yaml
+http://localhost:6060/newton-basin
+```
+
+#### Parameters
+
++ **iterations:**
+  + _Definition:_ The maximum number of iterations that should be performed for each pixel.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 500,000 inclusive.
+  + _Default:_ 32
++ **polynomial:**
+  + _Definition:_ The equation whose solution is to be found using the Newton-Raphson method.
+  + _Type:_ [Polynomial](#polynomial-type)
+  + _Default:_ `-1+x^5` ($-1+x^5$)
++ **bail_out:**
+  + _Definition:_ The value for which $|z|$ belongs to the fractal pattern. $|z|$ must be less than `bail_out` for the value of $z$ to belong to the fractal pattern.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 1e15
++ **region:**
+  + _Definition:_ The region of the infinite plane to display.
+  + _Type:_ [Rectangle](#rectangle-type)
+  + _Default:_ -2, -1.5, 4, 3
++ **color_palette:**
+  + _Definition:_ The color palette for coloring the pixels.
+  + _Type:_ [ColorPalette](#color-palette-type)
+  + _Default:_ A dynamic set of colors.
+
+#### Sample
+
+![Image of the Newton basin of the polynomial -1+x^5 in the region -2, -1.5, 4, 3, with 32 iterations, and a bail out of 1e15](assets/examples/newton-basin.png)
 
 ### Sierpinski Carpet
 
