@@ -2,6 +2,8 @@
 
 Fractage is a fractal image generation service written in Golang.
 
+![Newton basin fractal generation with fractage](assets/readme-0.png)
+
 ## Requirements
 
 + Go (version 1.18+)
