@@ -55,6 +55,63 @@ http://localhost:6060/cantor-set
 
 ![Image of a Cantor set with 5 iterations and a line height of 5](assets/examples/cantor-set.png)
 
+### Hopalong
+
+```yaml
+http://localhost:6060/hopalong
+```
+
+#### Parameters
+
++ **resolution:**
+  + _Definition:_ The resolution for each pixel.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 5_000 inclusive.
+  + _Default:_ 5
++ **a:**
+  + _Definition:_ The value of the variable $a$ in the hopalong function.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 5
++ **b:**
+  + _Definition:_ The value of the variable $b$ in the hopalong function.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 1
++ **c:**
+  + _Definition:_ The value of the variable $c$ in the hopalong function.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 5
++ **d:**
+  + _Definition:_ The value of the variable $d$ in the hopalong function.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 0
++ **x:**
+  + _Definition:_ The starting value of $x$ in the hopalong function.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ -1
++ **y:**
+  + _Definition:_ The starting value of $y$ in the hopalong function.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 0
++ **scale:**
+  + _Definition:_ The scale of the image displayed.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 5
++ **type:**
+  + _Definition:_ The type of hopalong to function to use.
+  + _Type:_ `Enum`
+    + `classic_bm` -> The classic Barry Martin hopalong.
+    + `positive_bm` -> The positive Barry Martin hopalong.
+    + `additive_bm` -> The additive Barry Martin hopalong.
+    + `gingerbread_man` -> The gingerbread man hopalong.
+  + _Default:_ `classic_bm`
++ **color:**
+  + _Definition:_ The color for coloring the pixels.
+  + _Type:_ [Color](#color-type)
+  + _Default:_ random color.
+
+#### Sample
+![Image of the classic Barry Martin hopalong with a resolution of 5, a = 5, b = 1, c = 5, x = -1, y = 0, and a scale of 5](assets/examples/hopalong.png)
+
 ### Julia Set
 
 ```yaml
