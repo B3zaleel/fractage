@@ -89,6 +89,40 @@ http://localhost:6060/julia-set
 
 ![Image of a Julia set in the region -1.5, -1.5, 3, 3, with 250 iterations, c = -0.5 + 0.6i, and a bail out of 2](assets/examples/julia-set.png)
 
+### Mandelbrot Set
+
+```yaml
+http://localhost:6060/mandelbrot-set
+```
+
+#### Parameters
+
++ **iterations:**
+  + _Definition:_ The maximum number of iterations that should be performed for each pixel.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 500,000 inclusive.
+  + _Default:_ 700
++ **bail_out:**
+  + _Definition:_ The value for which $|z|$ belongs to the fractal pattern. $|z|$ must be less than $\mathrm{bail\_out}^2$ for the value of $z$ to belong to the fractal pattern.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 20
++ **m:**
+  + _Definition:_ The value of $m$ in $z_{n + 1} = z_n^m + z_0$.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 2
++ **region:**
+  + _Definition:_ The region of the infinite plane to display.
+  + _Type:_ [Rectangle](#rectangle-type)
+  + _Default:_ -2, -1.25, 3.25, 2.5
++ **color_palette:**
+  + _Definition:_ The color palette for coloring the pixels.
+  + _Type:_ [ColorPalette](#color-palette-type)
+  + _Default:_ orange_blue.
+
+#### Sample
+
+![Image of the Mandelbrot set in the region -2, -1.25, 3.25, 2.5, with 700 iterations, m = 2, and a bail out of 20](assets/examples/mandelbrot-set.png)
+
 ### Newton Basin
 
 ```yaml
