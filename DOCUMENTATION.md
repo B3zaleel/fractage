@@ -159,14 +159,14 @@ http://localhost:6060/mandelbrot-set
   + _Type:_ [Integer](#integer-type)
   + _Range:_ 0 to 500,000 inclusive.
   + _Default:_ 700
-+ **bail_out:**
-  + _Definition:_ The value for which $|z|$ belongs to the fractal pattern. $|z|$ must be less than $\mathrm{bail\_out}^2$ for the value of $z$ to belong to the fractal pattern.
-  + _Type:_ [Float](#float-type)
-  + _Default:_ 20
 + **m:**
   + _Definition:_ The value of $m$ in $z_{n + 1} = z_n^m + z_0$.
   + _Type:_ [Float](#float-type)
   + _Default:_ 2
++ **bail_out:**
+  + _Definition:_ The value for which $|z|$ belongs to the fractal pattern. $|z|$ must be less than $\mathrm{bail\_out}^m$ for the value of $z$ to belong to the fractal pattern.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 20
 + **region:**
   + _Definition:_ The region of the infinite plane to display.
   + _Type:_ [Rectangle](#rectangle-type)
