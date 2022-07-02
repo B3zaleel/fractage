@@ -157,7 +157,7 @@ func (props *JuliaSet) render(img *image.RGBA) error {
 // Checks if a function name exists in the set of JULIA_SET_SERIES names.
 func IsValidJuliaSetSeriesFunction(txt string) bool {
 	fxnName := strings.Trim(txt, helpers.WHITESPACE_CUTSET)
-	for name, _ := range JULIA_SET_SERIES {
+	for name := range JULIA_SET_SERIES {
 		if name == fxnName {
 			return true
 		}
