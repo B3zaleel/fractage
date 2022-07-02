@@ -189,7 +189,8 @@ http://localhost:6060/julia-set
   + _Definition:_ The type of series to display.
   + _Type:_ `Enum`
     + `classic`: The classic Julia set. Values are generated from the series $z_{n + 1} = z_n^2 + c$.
-    + `lace`: The lace Julia set. Values are generated from the series $z_{n + 1} = \frac{iz_n^{-3} + 1010}{ciz_n^{-6} + 3301z_n}$, where $i$ is a variable.
+    + `lace`: The lace Julia set. Values are generated from the series $z_{n + 1} = \frac{iz_n^{-3} + 1010}{ciz_n^{-6} + 3301z_n}$, where $i, i \in \mathbb{C}$ is a variable.
+    + `phoenix`: The phoenix Julia set. Values are generated from the series $z_{n + 1} = z_n^2 + c + kz_{n - 1}$, where $k, k \in \mathbb{C}$ is a variable.
     + `csin`: Values are generated from the series $z_{n + 1} = c\sin(z_n)$.
     + `ccos`: Values are generated from the series $z_{n + 1} = c\cos(z_n)$.
     + `ctan`: Values are generated from the series $z_{n + 1} = c\tan(z_n)$.
