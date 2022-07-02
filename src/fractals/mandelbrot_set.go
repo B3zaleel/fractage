@@ -42,7 +42,6 @@ func (props *MandelbrotSet) WriteImage(output io.Writer) error {
 // Helper function for rendering the Mandelbrot set.
 func (props *MandelbrotSet) render(img *image.RGBA) error {
 	width, height := float64(props.Width), float64(props.Height)
-	logBailOut := math.Log(props.BailOut)
 	bailOutPow := math.Pow(props.BailOut, props.M)
 	step := math.Max(props.Region.Width/width, props.Region.Height/height)
 	xOffset := props.Region.X - (width*step-props.Region.Width)/2.0
@@ -72,8 +71,7 @@ func (props *MandelbrotSet) render(img *image.RGBA) error {
 			}
 			if n < props.MaxIterations {
 				// Z escaped
-				mu := float64(n) - math.Log2(math.Log(math.Sqrt(x2+y2))/logBailOut)
-				pixelColor, err = props.ColorPalette.GetColor(mu / float64(props.MaxIterations))
+				pixelColor, err = props.ColorPalette.GetColor(float64(n) / float64(props.MaxIterations))
 				if err != nil {
 					return err
 				}
