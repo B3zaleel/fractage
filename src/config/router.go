@@ -12,6 +12,7 @@ func AddRoutes(app *iris.Application) {
 	app.Get("/cantor-dust", controllers.GetCantorDust)
 	app.Get("/cantor-set", controllers.GetCantorSet)
 	app.Get("/hopalong", controllers.GetHopalong)
+	app.Get("/ifs", controllers.GetIFS)
 	app.Get("/julia-set", controllers.GetJuliaSet)
 	app.Get("/mandelbrot-set", controllers.GetMandelbrotSet)
 	app.Get("/newton-basin", controllers.GetNewtonBasin)
