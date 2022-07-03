@@ -22,8 +22,9 @@ const (
 	JULIA_SET_DEFAULT_BAIL_OUT       = 2
 	JULIA_SET_DEFAULT_REGION         = "-1.5, -1.5, 3, 3"
 	JULIA_SET_DEFAULT_SERIES_TYPE    = "classic"
-	JULIA_SET_DEFAULT_VARIABLES_TEXT = "i=3+0i"
+	JULIA_SET_DEFAULT_VARIABLES_TEXT = "i=3+0i, k=0.0-0.01i"
 	JULIA_SET_DEFAULT_VARIABLE_I     = 3 + 0i
+	JULIA_SET_DEFAULT_VARIABLE_K     = 0.0 - 0.01i
 )
 
 var (
@@ -35,6 +36,12 @@ var (
 			return func(z complex128) complex128 {
 				i := props.GetVaraible('i', JULIA_SET_DEFAULT_VARIABLE_I)
 				return (i*cmplx.Pow(z, -3) + 1010) / (props.C*i*cmplx.Pow(z, -6) + 3301*z)
+			}
+		},
+		"phoenix": func(props *JuliaSet) func(complex128) complex128 {
+			return func(z complex128) complex128 {
+				k := props.GetVaraible('k', JULIA_SET_DEFAULT_VARIABLE_K)
+				return z*z + props.C + k*props.zPrev
 			}
 		},
 		"csin":       func(props *JuliaSet) func(complex128) complex128 { return cTrig(props, cmplx.Sin) },
@@ -65,6 +72,8 @@ type JuliaSet struct {
 	Region             helpers.Rect
 	SeriesFunctionName string
 	Background         color.RGBA
+	zPrev              complex128
+	zNext              complex128
 }
 
 // Creates a function that computes the sum of c and the absolute value of
@@ -118,9 +127,13 @@ func (props *JuliaSet) render(img *image.RGBA) error {
 		for x := 0; x < int(width); x++ {
 			n = 0
 			Z := complex(xOffset+float64(x)*step, yOffset+float64(y)*step)
+			props.zPrev = Z
+			props.zNext = Z
 			seriesValue := math.Exp(-cmplx.Abs(Z))
 			for (n < props.MaxIterations) && (cmplx.Abs(Z) < props.BailOut) {
-				Z = seriesFunction(Z)
+				props.zPrev = Z
+				Z = props.zNext
+				props.zNext = seriesFunction(Z)
 				seriesValue += math.Exp(-cmplx.Abs(Z))
 				n++
 			}
