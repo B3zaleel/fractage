@@ -329,6 +329,13 @@ http://localhost:6060/sierpinski-triangle
 **Alias:** `<cmplx>`<br/>
 **Example:** `7.68 + 3i`
 
+### Boolean Type
+
+**Format:** `(1|t|T|TRUE|true|True)` for the value of `true` or `(0|f|F|FALSE|false|False)` for the value of `false`<br/>
+**Definition:** A true or false value.<br/>
+**Alias:** `<bool>`<br/>
+**Example:** `false`
+
 ### Color Type
 
 **Alias:** `<color>`
