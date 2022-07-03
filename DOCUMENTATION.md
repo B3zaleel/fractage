@@ -66,7 +66,7 @@ http://localhost:6060/hopalong
 + **resolution:**
   + _Definition:_ The resolution for each pixel.
   + _Type:_ [Integer](#integer-type)
-  + _Range:_ 0 to 5_000 inclusive.
+  + _Range:_ 0 to 5,000 inclusive.
   + _Default:_ 5
 + **a:**
   + _Definition:_ The value of the variable $a$ in the hopalong function.
@@ -110,6 +110,7 @@ http://localhost:6060/hopalong
   + _Default:_ random color.
 
 #### Sample
+
 ![Image of the classic Barry Martin hopalong with a resolution of 5, a = 5, b = 1, c = 5, x = -1, y = 0, and a scale of 5](assets/examples/hopalong.png)
 
 ### Iterated Function System
@@ -135,7 +136,7 @@ http://localhost:6060/ifs
 + **scale:**
   + _Definition:_ The scale of the image to display. Can be overwritten by the `focus` parameter.
   + _Type:_ [Float](#float-type)
-  + _Range_:_ 0 to 50, 000 inclusive.
+  + _Range_:_ 0 to 50,000 inclusive.
   + _Default:_ 1
 + **focus:**
   + _Definition:_ Specifies if the points should be brought to the center of the image. Can overwrite the effect of the `x`, `y`, and `scale` parameters.
@@ -144,8 +145,8 @@ http://localhost:6060/ifs
 + **iterations:**
   + _Definition:_ The number of points to draw.
   + _Type:_ [Integer](#integer-type)
-  + _Range:_ 0 to 5, 000, 000, 000 inclusive.
-  + _Default:_ 500, 000
+  + _Range:_ 0 to 5,000,000,000 inclusive.
+  + _Default:_ 500,000
 + **color:**
   + _Definition:_ The color for coloring the points in each set. This is used for giving the points a uniform color and can be overwritten by the `colors` parameter.
   + _Type:_ [Color](#color-type)
@@ -175,7 +176,7 @@ http://localhost:6060/julia-set
 + **c:**
   + _Definition:_ The value of $c$ in the equation $z = z^2 + c$.
   + _Type:_ [Complex](#complex-type)
-  + _Default:_ -0.5 + 0.6i
+  + _Default:_ $-0.5 + 0.6i$
 + **bail_out:**
   + _Definition:_ The value at which the series diverges.
   + _Type:_ [Float](#float-type)
@@ -187,7 +188,7 @@ http://localhost:6060/julia-set
 + **color_palette:**
   + _Definition:_ The color palette for coloring the pixels.
   + _Type:_ [ColorPalette](#color-palette-type)
-  + _Default:_ orange_blue.
+  + _Default:_ `orange_blue`
 
 #### Sample
 
@@ -221,7 +222,7 @@ http://localhost:6060/mandelbrot-set
 + **color_palette:**
   + _Definition:_ The color palette for coloring the pixels.
   + _Type:_ [ColorPalette](#color-palette-type)
-  + _Default:_ orange_blue.
+  + _Default:_ `orange_blue`
 
 #### Sample
 
@@ -247,7 +248,7 @@ http://localhost:6060/newton-basin
 + **bail_out:**
   + _Definition:_ The value for which $|z|$ belongs to the fractal pattern. $|z|$ must be less than `bail_out` for the value of $z$ to belong to the fractal pattern.
   + _Type:_ [Float](#float-type)
-  + _Default:_ 1e15
+  + _Default:_ $1e15$
 + **region:**
   + _Definition:_ The region of the infinite plane to display.
   + _Type:_ [Rectangle](#rectangle-type)
