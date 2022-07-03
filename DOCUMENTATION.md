@@ -325,9 +325,9 @@ http://localhost:6060/sierpinski-triangle
 ### Complex Type
 
 **Format:** `<float>([+-]<float>i)?`<br/>
-**Definition:** A complex number consisting of 64-bit floating point real and imaginary parts.<br/>
+**Definition:** A complex number consisting of 64-bit floating point real and imaginary parts. If there's a sign, there should be no spaces around it.<br/>
 **Alias:** `<cmplx>`<br/>
-**Example:** `7.68 + 3i`
+**Example:** `7.68+3i`
 
 ### Boolean Type
 
