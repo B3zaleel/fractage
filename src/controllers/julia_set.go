@@ -17,6 +17,7 @@ const (
 	JULIA_SET_DEFAULT_C             = -0.5 + 0.6i
 	JULIA_SET_DEFAULT_BAIL_OUT      = 2
 	JULIA_SET_DEFAULT_REGION        = "-1.5, -1.5, 3, 3"
+	JULIA_SET_DEFAULT_SERIES_TYPE   = "classic"
 )
 
 func GetJuliaSet(ctx iris.Context) {
@@ -31,6 +32,7 @@ func GetJuliaSet(ctx iris.Context) {
 	}
 	colorPaletteValue := JULIA_SET_DEFAULT_COLOR_PALETTE
 	regionValue := JULIA_SET_DEFAULT_REGION
+	seriesName := JULIA_SET_DEFAULT_SERIES_TYPE
 	if query.Has("width") {
 		width, err := strconv.Atoi(query.Get("width"))
 		if err != nil {
@@ -81,6 +83,14 @@ func GetJuliaSet(ctx iris.Context) {
 		}
 		fractal.BailOut = bailOut
 	}
+	if query.Has("type") {
+		seriesName = query.Get("type")
+	}
+	if !fractals.IsValidJuliaSetSeriesFunction(seriesName) {
+		ctx.Text("Invalid function type")
+		return
+	}
+	fractal.SeriesFunctionName = seriesName
 	if query.Has("background") {
 		background, err := helpers.ParseColor(query.Get("background"))
 		if err != nil {
