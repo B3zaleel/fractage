@@ -188,7 +188,7 @@ http://localhost:6060/julia-set
 + **color_palette:**
   + _Definition:_ The color palette for coloring the pixels.
   + _Type:_ [ColorPalette](#color-palette-type)
-  + _Default:_ `orange_blue`
+  + _Default:_ `multi_colored`
 
 #### Sample
 
