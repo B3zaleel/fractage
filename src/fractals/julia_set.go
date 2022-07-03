@@ -36,11 +36,21 @@ func absTrig(props *JuliaSet, trigFxn func(complex128) complex128) func(complex1
 	}
 }
 
+// Creates a function that computes the product of c and the trigonometric value for a given z.
+func cTrig(props *JuliaSet, trigFxn func(complex128) complex128) func(complex128) complex128 {
+	return func(z complex128) complex128 {
+		return props.C * trigFxn(z)
+	}
+}
+
 var (
 	JULIA_SET_SERIES = map[string]func(*JuliaSet) func(complex128) complex128{
 		"classic": func(props *JuliaSet) func(complex128) complex128 {
 			return func(z complex128) complex128 { return z*z + props.C }
 		},
+		"csin":       func(props *JuliaSet) func(complex128) complex128 { return cTrig(props, cmplx.Sin) },
+		"ccos":       func(props *JuliaSet) func(complex128) complex128 { return cTrig(props, cmplx.Cos) },
+		"ctan":       func(props *JuliaSet) func(complex128) complex128 { return cTrig(props, cmplx.Tan) },
 		"abs_sin4":   func(props *JuliaSet) func(complex128) complex128 { return absTrig(props, cmplx.Sin) },
 		"abs_cos4":   func(props *JuliaSet) func(complex128) complex128 { return absTrig(props, cmplx.Cos) },
 		"abs_tan4":   func(props *JuliaSet) func(complex128) complex128 { return absTrig(props, cmplx.Tan) },
