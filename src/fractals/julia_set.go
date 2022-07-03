@@ -110,10 +110,10 @@ func (props *JuliaSet) render(img *image.RGBA) error {
 	return nil
 }
 
-// Checks if a function name exists in the set of JULIA_SET_PARTIAL_FUNCTIONS names.
+// Checks if a function name exists in the set of JULIA_SET_SERIES names.
 func IsValidJuliaSetPartialFunction(txt string) bool {
 	fxnName := strings.Trim(txt, helpers.WHITESPACE_CUTSET)
-	for name, _ := range JULIA_SET_PARTIAL_FUNCTIONS {
+	for name, _ := range JULIA_SET_SERIES {
 		if name == fxnName {
 			return true
 		}
