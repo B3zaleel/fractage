@@ -1,12 +1,14 @@
 package fractals
 
 import (
+	"errors"
 	"image"
 	"image/color"
 	"image/png"
 	"io"
 	"math"
 	"math/cmplx"
+	"strconv"
 	"strings"
 
 	"github.com/B3zaleel/fractage/src/helpers"
@@ -19,6 +21,7 @@ type JuliaSet struct {
 	ColorPalette       helpers.ColorPalette
 	MaxIterations      int
 	C                  complex128
+	Variables          map[rune]complex128
 	BailOut            float64
 	Region             helpers.Rect
 	SeriesFunctionName string
@@ -129,4 +132,43 @@ func IsValidJuliaSetSeriesFunction(txt string) bool {
 		}
 	}
 	return false
+}
+
+// Retrieves the value of a variable and returns a default value if the variable doesn't exist.
+func (props *JuliaSet) GetVaraible(c rune, defaultValue complex128) complex128 {
+	for key, value := range props.Variables {
+		if key == c {
+			return value
+		}
+	}
+	return defaultValue
+}
+
+// Converts a comma-separated list of variable assignments to a map of runes and complex numbers.
+func ParseJuliaSetVariables(txt string) (map[rune]complex128, error) {
+	values, err := helpers.GetCSV(txt)
+	if err != nil {
+		return nil, err
+	}
+	variables := make(map[rune]complex128, len(values))
+	for i := 0; i < len(values); i++ {
+		rule := strings.Trim(values[i], helpers.WHITESPACE_CUTSET)
+		before, after, found := strings.Cut(rule, "=")
+		if found {
+			variable := []rune(strings.Trim(before, helpers.WHITESPACE_CUTSET))
+			if len(variable) == 1 {
+				valueText := strings.Trim(after, helpers.WHITESPACE_CUTSET)
+				value, err := strconv.ParseComplex(valueText, 128)
+				if err != nil {
+					return nil, err
+				}
+				variables[variable[0]] = value
+			} else {
+				return nil, errors.New("A variable must be a single character")
+			}
+		} else {
+			return nil, errors.New("Invalid variable assignment. It must be of the form variable=value")
+		}
+	}
+	return variables, nil
 }

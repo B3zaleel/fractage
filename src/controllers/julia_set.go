@@ -11,13 +11,14 @@ import (
 )
 
 const (
-	JULIA_SET_MAX_ITERATIONS        = 500_000
-	JULIA_SET_DEFAULT_ITERATIONS    = 250
-	JULIA_SET_DEFAULT_COLOR_PALETTE = "multi_colored"
-	JULIA_SET_DEFAULT_C             = -0.5 + 0.6i
-	JULIA_SET_DEFAULT_BAIL_OUT      = 2
-	JULIA_SET_DEFAULT_REGION        = "-1.5, -1.5, 3, 3"
-	JULIA_SET_DEFAULT_SERIES_TYPE   = "classic"
+	JULIA_SET_MAX_ITERATIONS         = 500_000
+	JULIA_SET_DEFAULT_ITERATIONS     = 250
+	JULIA_SET_DEFAULT_COLOR_PALETTE  = "multi_colored"
+	JULIA_SET_DEFAULT_C              = -0.5 + 0.6i
+	JULIA_SET_DEFAULT_BAIL_OUT       = 2
+	JULIA_SET_DEFAULT_REGION         = "-1.5, -1.5, 3, 3"
+	JULIA_SET_DEFAULT_SERIES_TYPE    = "classic"
+	JULIA_SET_DEFAULT_VARIABLES_TEXT = ""
 )
 
 func GetJuliaSet(ctx iris.Context) {
@@ -33,6 +34,7 @@ func GetJuliaSet(ctx iris.Context) {
 	colorPaletteValue := JULIA_SET_DEFAULT_COLOR_PALETTE
 	regionValue := JULIA_SET_DEFAULT_REGION
 	seriesName := JULIA_SET_DEFAULT_SERIES_TYPE
+	variablesTxt := JULIA_SET_DEFAULT_VARIABLES_TEXT
 	if query.Has("width") {
 		width, err := strconv.Atoi(query.Get("width"))
 		if err != nil {
@@ -86,6 +88,9 @@ func GetJuliaSet(ctx iris.Context) {
 	if query.Has("type") {
 		seriesName = query.Get("type")
 	}
+	if query.Has("variables") {
+		variablesTxt = query.Get("variables")
+	}
 	if !fractals.IsValidJuliaSetSeriesFunction(seriesName) {
 		ctx.Text("Invalid function type")
 		return
@@ -99,6 +104,11 @@ func GetJuliaSet(ctx iris.Context) {
 		}
 		fractal.Background = background
 	}
+	variables, err := fractals.ParseJuliaSetVariables(variablesTxt)
+	if err != nil {
+		ctx.Text(err.Error())
+		return
+	}
 	region, err := helpers.ParseRect(regionValue)
 	if err != nil {
 		ctx.Text(err.Error())
@@ -109,6 +119,7 @@ func GetJuliaSet(ctx iris.Context) {
 		ctx.Text(err.Error())
 		return
 	}
+	fractal.Variables = variables
 	fractal.Region = region
 	fractal.ColorPalette = colorPalette
 	ctx.ContentType("image/png")
