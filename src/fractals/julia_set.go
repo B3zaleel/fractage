@@ -31,6 +31,12 @@ var (
 		"classic": func(props *JuliaSet) func(complex128) complex128 {
 			return func(z complex128) complex128 { return z*z + props.C }
 		},
+		"lace": func(props *JuliaSet) func(complex128) complex128 {
+			return func(z complex128) complex128 {
+				i := props.GetVaraible('i', JULIA_SET_DEFAULT_VARIABLE_I)
+				return (i*cmplx.Pow(z, -3) + 1010) / (props.C*i*cmplx.Pow(z, -6) + 3301*z)
+			}
+		},
 		"csin":       func(props *JuliaSet) func(complex128) complex128 { return cTrig(props, cmplx.Sin) },
 		"ccos":       func(props *JuliaSet) func(complex128) complex128 { return cTrig(props, cmplx.Cos) },
 		"ctan":       func(props *JuliaSet) func(complex128) complex128 { return cTrig(props, cmplx.Tan) },
