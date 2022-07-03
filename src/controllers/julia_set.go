@@ -10,31 +10,20 @@ import (
 	"github.com/kataras/iris/v12"
 )
 
-const (
-	JULIA_SET_MAX_ITERATIONS         = 500_000
-	JULIA_SET_DEFAULT_ITERATIONS     = 250
-	JULIA_SET_DEFAULT_COLOR_PALETTE  = "multi_colored"
-	JULIA_SET_DEFAULT_C              = -0.5 + 0.6i
-	JULIA_SET_DEFAULT_BAIL_OUT       = 2
-	JULIA_SET_DEFAULT_REGION         = "-1.5, -1.5, 3, 3"
-	JULIA_SET_DEFAULT_SERIES_TYPE    = "classic"
-	JULIA_SET_DEFAULT_VARIABLES_TEXT = ""
-)
-
 func GetJuliaSet(ctx iris.Context) {
 	query := ctx.Request().URL.Query()
 	fractal := fractals.JuliaSet{
 		Width:         DEFAULT_WIDTH,
 		Height:        DEFAULT_HEIGHT,
-		C:             JULIA_SET_DEFAULT_C,
-		MaxIterations: JULIA_SET_DEFAULT_ITERATIONS,
-		BailOut:       JULIA_SET_DEFAULT_BAIL_OUT,
+		C:             fractals.JULIA_SET_DEFAULT_C,
+		MaxIterations: fractals.JULIA_SET_DEFAULT_ITERATIONS,
+		BailOut:       fractals.JULIA_SET_DEFAULT_BAIL_OUT,
 		Background:    color.RGBA{255, 255, 255, 255},
 	}
-	colorPaletteValue := JULIA_SET_DEFAULT_COLOR_PALETTE
-	regionValue := JULIA_SET_DEFAULT_REGION
-	seriesName := JULIA_SET_DEFAULT_SERIES_TYPE
-	variablesTxt := JULIA_SET_DEFAULT_VARIABLES_TEXT
+	colorPaletteValue := fractals.JULIA_SET_DEFAULT_COLOR_PALETTE
+	regionValue := fractals.JULIA_SET_DEFAULT_REGION
+	seriesName := fractals.JULIA_SET_DEFAULT_SERIES_TYPE
+	variablesTxt := fractals.JULIA_SET_DEFAULT_VARIABLES_TEXT
 	if query.Has("width") {
 		width, err := strconv.Atoi(query.Get("width"))
 		if err != nil {
@@ -68,8 +57,8 @@ func GetJuliaSet(ctx iris.Context) {
 			ctx.Text(err.Error())
 			return
 		}
-		if iterations < 0 || iterations > JULIA_SET_MAX_ITERATIONS {
-			ctx.Text(fmt.Sprintf("Too many iterations. Max: %d\n", JULIA_SET_MAX_ITERATIONS))
+		if iterations < 0 || iterations > fractals.JULIA_SET_MAX_ITERATIONS {
+			ctx.Text(fmt.Sprintf("Too many iterations. Max: %d\n", fractals.JULIA_SET_MAX_ITERATIONS))
 			return
 		}
 		fractal.MaxIterations = iterations
