@@ -185,6 +185,29 @@ http://localhost:6060/julia-set
   + _Definition:_ The region of the infinite plane to display.
   + _Type:_ [Rectangle](#rectangle-type)
   + _Default:_ -1.5, -1.5, 3, 3
++ **type:**
+  + _Definition:_ The type of series to display.
+  + _Type:_ `Enum`
+    + `classic`: The classic Julia set. Values are generated from the series $z_{n + 1} = z_n^2 + c$.
+    + `lace`: The lace Julia set. Values are generated from the series $z_{n + 1} = \frac{iz_n^{-3} + 1010}{ciz_n^{-6} + 3301z_n}$, where $i$ is a variable.
+    + `csin`: Values are generated from the series $z_{n + 1} = c\sin(z_n)$.
+    + `ccos`: Values are generated from the series $z_{n + 1} = c\cos(z_n)$.
+    + `ctan`: Values are generated from the series $z_{n + 1} = c\tan(z_n)$.
+    + `abs_sin4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\sin^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_cos4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\cos^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_tan4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\tan^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_cot4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\cot^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_sinh4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\sinh^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_cosh4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\cosh^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_tanh4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\tanh^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_asinh4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\mathrm{asinh}^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_acosh4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\mathrm{acosh}^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+    + `abs_atanh4`: Values are generated from the series $z_{n + 1} = \mathrm{abs}(\mathrm{atanh}^4(z_n)) + c$, where $\mathrm{abs}$ is calculated as $\mathrm{abs}(3) + \mathrm{abs}(-2)$ for the complex number $3-2i$.
+  + _Default:_ `classic`
++ **variables:**
+  + _Definition:_ A comma-separated list of variable assignments.
+  + _Type:_ A list of [VariableAssignments](#variable-assignment-type).
+  + _Default:_ `i=3+0i`
 + **color_palette:**
   + _Definition:_ The color palette for coloring the pixels.
   + _Type:_ [ColorPalette](#color-palette-type)
