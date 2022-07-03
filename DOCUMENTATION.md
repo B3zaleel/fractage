@@ -112,6 +112,53 @@ http://localhost:6060/hopalong
 #### Sample
 ![Image of the classic Barry Martin hopalong with a resolution of 5, a = 5, b = 1, c = 5, x = -1, y = 0, and a scale of 5](assets/examples/hopalong.png)
 
+### Iterated Function System
+
+```yaml
+http://localhost:6060/ifs
+```
+
+#### Parameters
+
++ **variables:**
+  + _Definition:_ The value of the variables $a$, $b$, $c$, $d$, $e$, $f$, and $probability$ for each set of the iterated function system of the functions $x_{n + 1} = ax_n + by_n + e$ and $y_{n + 1} = cx_n + dy_n + f$. The first 7 values belong to the first set, the next 7 values belong to the second set, and the $n^\mathrm{th}$ 7 values belong to the $n^\mathrm{th}$ set.
+  + _Type:_ A $7n$ array of [Float](#float-type)s, where $n$ is an integer greater than $0$.
+  + _Default:_ 0.0,0.0,0.0,0.16,0.0,0.0,0.01, 0.2,-0.26,0.23,0.22,0.0,1.6,0.07, -0.15,0.28,0.26,0.24,0.0,0.44,0.07, 0.85,0.04,-0.04,0.85,0.0,1.6,0.85
++ **x:**
+  + _Definition:_ The horizontal displacement of the image. Can be overwritten by the `focus` parameter.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 0
++ **y:**
+  + _Definition:_ The vertical displacement of the image. Can be overwritten by the `focus` parameter.
+  + _Type:_ [Float](#float-type)
+  + _Default:_ 0
++ **scale:**
+  + _Definition:_ The scale of the image to display. Can be overwritten by the `focus` parameter.
+  + _Type:_ [Float](#float-type)
+  + _Range_:_ 0 to 50, 000 inclusive.
+  + _Default:_ 1
++ **focus:**
+  + _Definition:_ Specifies if the points should be brought to the center of the image. Can overwrite the effect of the `x`, `y`, and `scale` parameters.
+  + _Type:_ [Boolean](#boolean-type)
+  + _Default:_ true
++ **iterations:**
+  + _Definition:_ The number of points to draw.
+  + _Type:_ [Integer](#integer-type)
+  + _Range:_ 0 to 5, 000, 000, 000 inclusive.
+  + _Default:_ 500, 000
++ **color:**
+  + _Definition:_ The color for coloring the points in each set. This is used for giving the points a uniform color and can be overwritten by the `colors` parameter.
+  + _Type:_ [Color](#color-type)
+  + _Default:_ random color.
++ **colors:**
+  + _Definition:_ The color for coloring each set of points. This is used for assigning a unique color to the points that belong under a set of variables. Invalid colors are ignored and a random colour is used as a replacement. A random colour is also assigned to a set if there are an insufficient number of colours for the set of variables that were specified.
+  + _Type:_ A comma-separated list of [Color](#color-type)s.
+  + _Default:_ `mahogany, mahogany, mahogany, mahogany`
+
+#### Sample
+
+![Image of an iterated function system that has been centered with 500000 iterations, variables 0.0,0.0,0.0,0.16,0.0,0.0,0.01, 0.2,-0.26,0.23,0.22,0.0,1.6,0.07, -0.15,0.28,0.26,0.24,0.0,0.44,0.07, 0.85,0.04,-0.04,0.85,0.0,1.6,0.85, and colors mahogany, mahogany, mahogany, mahogany](assets/examples/ifs.png)
+
 ### Julia Set
 
 ```yaml
