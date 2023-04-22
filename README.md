@@ -1,6 +1,6 @@
 # Fractage
 
-[![Build](https://github.com/B3zaleel/fractage/actions/workflows/build.yml/badge.svg)](https://github.com/B3zaleel/fractage/actions/workflows/build.yml)
+[![Build](https://github.com/B3zaleel/fractage/actions/workflows/build.yaml/badge.svg)](https://github.com/B3zaleel/fractage/actions/workflows/build.yaml)
 
 Fractage is a fractal image generation service written in Golang.
 
