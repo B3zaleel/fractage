@@ -12,10 +12,20 @@ Fractage is a fractal image generation service written in Golang.
 
 ## How To Use
 
-Run the command below using your Linux/WSL terminal. Uninstalled modules should be downloaded on your system before the program starts for the first time.
+### Via Local Terminal
+
+Clone this repository and run the command below using your Linux/WSL terminal. Uninstalled modules would be downloaded on your system before the program starts during the first run.
 
 ```powershell
 ./run.bash
+```
+
+### Via Docker
+
+Run the command below.
+
+``` powershell
+docker run -d -p 6060:6060 b3zaleel/fractage
 ```
 
 See [Documentation](DOCUMENTATION.md) for more details about the supported fractals and endpoints.
