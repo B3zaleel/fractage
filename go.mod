@@ -3,6 +3,12 @@ module github.com/B3zaleel/fractage
 go 1.18
 
 require (
+	github.com/kataras/iris/v12 v12.2.0-beta3.0.20220606065650-a794ee0a7aa8
+	github.com/llgcode/draw2d v0.0.0-20210904075650-80aa0a2a901d
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
+)
+
+require (
 	github.com/BurntSushi/toml v1.1.0 // indirect
 	github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53 // indirect
 	github.com/CloudyKit/jet/v6 v6.1.0 // indirect
@@ -23,12 +29,10 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kataras/blocks v0.0.5 // indirect
 	github.com/kataras/golog v0.1.7 // indirect
-	github.com/kataras/iris/v12 v12.2.0-beta3.0.20220606065650-a794ee0a7aa8 // indirect
 	github.com/kataras/pio v0.0.10 // indirect
 	github.com/kataras/sitemap v0.0.5 // indirect
 	github.com/kataras/tunnel v0.0.4 // indirect
 	github.com/klauspost/compress v1.15.6 // indirect
-	github.com/llgcode/draw2d v0.0.0-20210904075650-80aa0a2a901d // indirect
 	github.com/mailgun/raymond/v2 v2.0.46 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.18 // indirect
@@ -46,10 +50,9 @@ require (
 	golang.org/x/crypto v0.0.0-20220507011949-2cf3adece122 // indirect
 	golang.org/x/image v0.0.0-20220617043117-41969df76e82 // indirect
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
-	golang.org/x/sys v0.0.0-20220503163025-988cb79eb6c6 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
+	golang.org/x/text v0.3.8 // indirect
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.66.6 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
